@@ -1,28 +1,5 @@
-# Local Setup
-
-# Installation
-https://cassandra.apache.org/doc/stable/cassandra/getting_started/installing.html
-
-# YOutube
-https://www.youtube.com/watch?v=-9P4CxRWL8c
-
-# Verification command 
-sudo systemctl status cassandra
-sudo systemctl enable cassandra
-sudo systemctl start cassandra
-
-# Configuration
-sudo nano /etc/cassandra/cassandra.yaml
-
-# CLI interface
-cqlsh
-
-# Cloud Setup
-
 # Installation
 https://astra.datastax.com/org/273f08ef-144f-4c54-adbd-937497fd25a1
-
-# STEP
 
 # COMMAND 
 > USE "keyspace_name";
@@ -36,6 +13,6 @@ https://astra.datastax.com/org/273f08ef-144f-4c54-adbd-937497fd25a1
   );
 > SELECT * FROM "keyspace_name".table_name;
 
-SELECT * FROM "22510057".erp_students;
+
 
 
