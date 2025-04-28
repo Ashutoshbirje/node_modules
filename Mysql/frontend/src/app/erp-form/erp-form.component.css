@@ -1,0 +1,104 @@
+/* Center the form container */
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #c4d8d8; /* Light blue-gray background */
+    padding: 20px; /* Padding to avoid overflow on small screens */
+  }
+  
+  /* Style the form box */
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 30px;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 350px; /* Makes the form adapt to screen size */
+    text-align: center;
+  }
+  
+  /* Title styling */
+  h2 {
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  
+  /* Label styling */
+  label {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+    width: 100%;
+    margin-bottom: 3px;
+  }
+  
+  /* Input fields */
+  input {
+    width: 95%;
+    padding: 10px;
+    border: none;
+    background-color: #e7e3e6;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+    color: #6c757d;
+    font-weight: bold;
+  }
+  
+  /* Focus effect */
+  input:focus {
+    outline: none;
+    background-color: #ddd;
+  }
+  
+  /* Submit button */
+  button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background-color: #4a63ff;
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s ease;
+    margin-top: 10px;
+  }
+  
+  /* Button hover effect */
+  button:hover {
+    background-color: #3b4edb;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 480px) {
+    form {
+      width: 90%;
+      padding: 20px;
+    }
+  
+    h2 {
+      font-size: 16px;
+    }
+  
+    input {
+      font-size: 12px;
+      padding: 8px;
+    }
+  
+    button {
+      padding: 10px;
+      font-size: 14px;
+    }
+  }
+  

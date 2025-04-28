@@ -1,0 +1,16 @@
+
+
+# COMMAND 
+
+-- 1. Create database
+CREATE DATABASE erp_system;
+
+-- 2. Use the database
+USE erp_system;
+
+-- 3. Create table
+CREATE TABLE erp_entries (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  prn CHAR(10) NOT NULL
+);
