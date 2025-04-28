@@ -1,0 +1,17 @@
+<form [formGroup]="erpForm" (ngSubmit)="onSubmit()">
+  <h2>ERP-FORM</h2>
+
+  <label for="name">Name</label>
+  <input id="name" type="text" formControlName="name" placeholder="ASHUTOSH BIRJE" />
+  <div *ngIf="erpForm.get('name')?.invalid && erpForm.get('name')?.touched">
+      <small style="color: red;">Name is required (Min 3 characters).</small>
+  </div>
+  
+  <label for="prn">Mobile Number</label>
+  <input id="prn" type="text" formControlName="prn" placeholder="9421191638" />
+  <div *ngIf="erpForm.get('prn')?.invalid && erpForm.get('prn')?.touched">
+      <small style="color: red;">PRN must be exactly 10 digits.</small>
+  </div>
+
+  <button type="submit" [disabled]="erpForm.invalid">Submit</button>
+</form>
