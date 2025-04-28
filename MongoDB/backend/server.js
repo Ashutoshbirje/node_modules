@@ -18,7 +18,3 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
-// MONGO_URI=mongodb+srv://AshutoshBirje:nojd2wsTSPH7D4Ma@clusterone.lg23t.mongodb.net/ERP_System?retryWrites=true&w=majority
-// MONGO_URI=mongodb://localhost:27017/ERP_System
-// PORT=5000
