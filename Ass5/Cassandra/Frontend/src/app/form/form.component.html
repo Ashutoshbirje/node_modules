@@ -1,0 +1,32 @@
+<div *ngIf="!submitted">
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <div>
+      <label for="name">Name:</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        [(ngModel)]="formData.name" 
+        required
+      />
+    </div>
+
+    <div>
+      <label for="prn">PRN:</label>
+      <input
+        type="text"
+        id="prn"
+        name="prn"
+        [(ngModel)]="formData.prn" 
+        required
+        pattern="[0-9]{10}"
+      />
+    </div>
+
+    <button type="submit" [disabled]="!loginForm.valid">Login</button>
+  </form>
+</div>
+
+<div *ngIf="submitted">
+  <app-home></app-home>
+</div>
