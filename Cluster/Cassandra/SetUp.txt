@@ -1,0 +1,122 @@
+# Prerequisites
+> Docker Desktop installed on Windows
+> Git Bash or WSL terminal (for running shell scripts on Windows)
+> Enable Virtualization in BIOS
+> Docker allocated 6GB+ RAM
+
+# Directory Structure
+cassandra-cluster/
+├── node1/
+│   └── cassandra.yaml
+├── node2/
+│   └── cassandra.yaml
+├── node3/
+│   └── cassandra.yaml
+└── docker-compose.yml
+
+# docker-compose.yml
+version: '3'
+services:
+  cassandra-node1:
+    image: cassandra:4.0
+    container_name: cassandra-node1
+    hostname: cassandra-node1
+    networks:
+      cassandra_net:
+        ipv4_address: 172.20.0.2
+    ports:
+      - "9042:9042"
+    environment:
+      - CASSANDRA_CLUSTER_NAME=2025GRP01
+      - CASSANDRA_SEEDS=cassandra-node1
+      - CASSANDRA_BROADCAST_ADDRESS=172.20.0.2
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+    volumes:
+      - ./node1:/etc/cassandra
+
+  cassandra-node2:
+    image: cassandra:4.0
+    container_name: cassandra-node2
+    hostname: cassandra-node2
+    networks:
+      cassandra_net:
+        ipv4_address: 172.20.0.3
+    environment:
+      - CASSANDRA_CLUSTER_NAME=2025GRP01
+      - CASSANDRA_SEEDS=172.20.0.2
+      - CASSANDRA_BROADCAST_ADDRESS=172.20.0.3
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+    volumes:
+      - ./node2:/etc/cassandra
+
+  cassandra-node3:
+    image: cassandra:4.0
+    container_name: cassandra-node3
+    hostname: cassandra-node3
+    networks:
+      cassandra_net:
+        ipv4_address: 172.20.0.4
+    environment:
+      - CASSANDRA_CLUSTER_NAME=2025GRP01
+      - CASSANDRA_SEEDS=172.20.0.2
+      - CASSANDRA_BROADCAST_ADDRESS=172.20.0.4
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+    volumes:
+      - ./node3:/etc/cassandra
+
+networks:
+  cassandra_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+
+# CMD
+> docker-compose up -d
+> docker exec -it cassandra-node1 cqlsh
+> SELECT peer, rpc_address FROM system.peers;
+
+# Download
+> https://downloads.datastax.com/#opscenter
+
+# install & Configure:
+> Extract the zip.
+> Go to OpsCenter directory: cd opscenter./bin/opscenter
+> Open http://127.0.0.1:8888 in browser.
+> Add a new cluster → Give contact point as 172.20.0.2
+
+# Cassandra Schema Design
+CREATE KEYSPACE weather_data WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 3};
+
+USE weather_data;
+
+CREATE TABLE temperature_by_station (
+    weatherstation_id text,
+    reading_time timestamp,
+    temperature float,
+    PRIMARY KEY (weatherstation_id, reading_time)
+) WITH CLUSTERING ORDER BY (reading_time DESC);
+
+INSERT INTO temperature_by_station (weatherstation_id, reading_time, temperature)
+VALUES ('WS001', toTimestamp(now()), 32.5);
+
+SELECT * FROM temperature_by_station WHERE weatherstation_id = 'WS001' LIMIT 1;
+
+SELECT * FROM temperature_by_station WHERE weatherstation_id = 'WS001';
+
+
+# Verify Cluster is Up and Running
+> docker ps
+> docker exec -it cassandra-node1 cqlsh
+> DESCRIBE CLUSTER;
+> nodetool status
+> nodetool gossipinfo
+> SELECT peer, rpc_address FROM system.peers;
+> SELECT * FROM system.local;
+> QUERY
+> nodetool status
+> docker stop cassandra-node2
+> docker exec -it cassandra-node1 nodetool status
+> docker start cassandra-node2
+
