@@ -1,0 +1,179 @@
+<!-- <div class="bg-gray-500 m-10 p-8 rounded-lg">
+  <div class="flex flex-col gap-4 sm:items-center ">
+    <form>
+    <div  *ngFor="let student of s" class=" w-3xl bg-white dark:bg-gray-800 rounded-lg p-6 shadow-xl ring ring-gray-900/5 mb-5">
+      <div class="text-white font-bold mb-4">
+        QUE {{student.Id}}
+      </div>
+      <h3 class="text-gray-900 dark:text-white text-lg font-medium tracking-tight">
+       {{student.}}
+      </h3>
+
+      <div class="text-gray-500 dark:text-gray-400 mt-4 space-y-2">
+        <div class="flex items-center gap-2">
+          <input type="radio" id="option_1" name="1" value="option1" class="form-radio h-5 w-5 text-blue-600" [(ngModel)]="model.selectedAnswer">
+          <label for="q1-option1" class="text-sm">{{student.option_1}}</label>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <input type="radio" id="q1-option2" name="1" value="option2" class="form-radio h-5 w-5 text-blue-600" [(ngModel)]="model.selectedAnswer">
+          <label for="q1-option2" class="text-sm">{{student.option_2}}</label>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <input type="radio" id="q1-option3" name="1" value="option3" class="form-radio h-5 w-5 text-blue-600" [(ngModel)]="model.selectedAnswer">
+          <label for="q1-option3" class="text-sm">{{student.option_3}}</label>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <input type="radio" id="q1-option4" name="1" value="option4" class="form-radio h-5 w-5 text-blue-600" [(ngModel)]="model.selectedAnswer">
+          <label for="q1-option4" class="text-sm">{{student.option_4}}</label>
+        </div>
+
+     
+      </div>
+      <input type="hidden" id=`{{student.Id}}` value=`{{student.Id}}`>
+    </div>
+
+    
+  
+  </form>
+  </div>
+  <div class="mt-6">
+    <button type="button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ">
+      Submit Test
+    </button>
+  </div>
+</div> -->
+
+
+
+
+
+
+
+<!-- <div class="bg-gray-900 m-10 p-8 rounded-lg shadow-lg">
+  <div class="flex flex-col gap-6 sm:items-center">
+
+    
+     <form #quizForm="ngForm" (ngSubmit)="onSubmitAll(quizForm)">
+      <div *ngFor="let student of Questions" class="w-3xl bg-white dark:bg-gray-800 rounded-lg p-6 shadow-xl ring ring-gray-900/10 mb-6">
+        <form #quizForm="ngForm" (ngSubmit)="onSubmit(quizForm)">
+        <div class="text-blue-500 font-bold text-xl mb-4">
+          Question {{student.Id}}
+        </div>
+        <h3 class="text-gray-900 dark:text-white text-lg font-semibold mb-4"  >
+          {{student.Question}}
+        </h3>
+
+        <div class="text-gray-700 dark:text-gray-400 space-y-3">
+          <div class="flex items-center gap-3">
+            <input type="radio" id="option1-{{student.Id}}" name="{{student.Id}}" value="{{student.option_1}}" class="h-5 w-5 text-blue-600" [(ngModel)]="student.selectedAnswer"  required>
+            <label for="option1-{{student.Id}}" class="text-sm">{{student.option_1}}</label>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <input type="radio" id="option2-{{student.Id}}" name="{{student.Id}}" value="{{student.option_2}}" class="h-5 w-5 text-blue-600" [(ngModel)]="student.selectedAnswer" required>
+            <label for="option2-{{student.Id}}" class="text-sm">{{student.option_2}}</label>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <input type="radio" id="option3-{{student.Id}}" name="{{student.Id}}" value="{{student.option_3}}" class="h-5 w-5 text-blue-600" [(ngModel)]="student.selectedAnswer" required>
+            <label for="option3-{{student.Id}}" class="text-sm">{{student.option_3}}</label>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <input type="radio" id="option4-{{student.Id}}" name="{{student.Id}}" value="{{student.option_4}}" class="h-5 w-5 text-blue-600" [(ngModel)]="student.selectedAnswer" required>
+            <label for="option4-{{student.Id}}" class="text-sm">{{student.option_4}}</label>
+          </div>
+        </div>
+
+       
+         
+      <div class="mt-8 text-center">
+        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg">
+          Submit Answer
+        </button>
+      </div>
+    </form>
+      </div>
+      <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg">
+        Submit All
+      </button>
+    </form>
+
+    
+  </div>
+</div> -->
+
+
+<!-- 
+<div class="bg-gray-900 m-10 p-8 rounded-lg shadow-lg">
+  <div class="flex flex-col gap-6 sm:items-center">
+
+    
+     
+      <div *ngFor="let student of Questions" class="w-3xl bg-white dark:bg-gray-800 rounded-lg p-6 shadow-xl ring ring-gray-900/10 mb-6">
+        <form #quizForm="ngForm" (ngSubmit)="onSubmit(quizForm)">
+        <div class="text-blue-500 font-bold text-xl mb-4">
+          Question {{student.Id}}
+        </div>
+        <h3 class="text-gray-900 dark:text-white text-lg font-semibold mb-4"  >
+          {{student.Question}}
+        </h3>
+
+        <div class="text-gray-700 dark:text-gray-400 space-y-3">
+          <div class="flex items-center gap-3">
+            <input type="radio" id="option1-{{student.Id}}" name="{{student.Id}}" value="{{student.option_1}}" class="h-5 w-5 text-blue-600" [(ngModel)]="student.selectedAnswer"  required>
+            <label for="option1-{{student.Id}}" class="text-sm">{{student.option_1}}</label>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <input type="radio" id="option2-{{student.Id}}" name="{{student.Id}}" value="{{student.option_2}}" class="h-5 w-5 text-blue-600" [(ngModel)]="student.selectedAnswer" required>
+            <label for="option2-{{student.Id}}" class="text-sm">{{student.option_2}}</label>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <input type="radio" id="option3-{{student.Id}}" name="{{student.Id}}" value="{{student.option_3}}" class="h-5 w-5 text-blue-600" [(ngModel)]="student.selectedAnswer" required>
+            <label for="option3-{{student.Id}}" class="text-sm">{{student.option_3}}</label>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <input type="radio" id="option4-{{student.Id}}" name="{{student.Id}}" value="{{student.option_4}}" class="h-5 w-5 text-blue-600" [(ngModel)]="student.selectedAnswer" required>
+            <label for="option4-{{student.Id}}" class="text-sm">{{student.option_4}}</label>
+          </div>
+        </div>
+
+       
+         
+      <div class="mt-8 text-center">
+        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg">
+          Submit Answer
+        </button>
+      </div>
+        </form>
+      </div>
+      <button onclick="submitAll()" type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg">
+        Submit Test
+      </button>
+   
+
+    
+  </div>
+</div> -->
+
+
+<div class="bg-gray-900 m-10 p-8 rounded-lg shadow-lg ">
+  <div CLASS="text-white font-bold text-xl mb-7 text-center">
+    <h1>QUIZ FOR STUDENT</h1>
+  </div>
+  <div class="flex flex-col gap-6 sm:items-center">
+  <div *ngFor="let quiz of Questions" class=" w-full sm:w-1/2 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300 w-2xl">
+    <div class="p-6 text-white">
+      <h1 class="text-2xl font-bold mb-2">QUIZ ID : {{ quiz.quiz_Id }}</h1>
+      <h2 class="text-sm">QUIZ NAME : {{ quiz.quiz_name }}</h2>
+      <p>{{quiz.quiz_description}}</p>
+      <button class="mt-4 w-full bg-white text-indigo-600 font-medium py-2 rounded-lg hover:bg-indigo-100 transition" type="submit" [routerLink]="['/student/quiz', quiz.quiz_Id]">Attempt Quiz</button>
+    </div>
+  </div>
+</div> 

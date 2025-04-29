@@ -1,0 +1,166 @@
+<!-- <div class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="w-full max-w-5xl bg-white shadow-xl rounded-2xl p-8 mt-10">
+      <div class="text-center mb-6">
+        <h2 class="text-3xl font-bold text-gray-800">CREATE QUESTION</h2>
+      </div>
+      <div class="space-y-6">
+        <form #department="ngForm" (ngSubmit)="onSubmit(department)" class="space-y-4">
+  
+          <div>
+            <label for="Question" class="block text-lg font-medium text-gray-700">QUESTION</label>
+            <input type="text" class="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"  id="Question" name="Question" #Question="ngModel" [(ngModel)]="model.Question" placeholder="Enter your question">
+          </div>
+  
+          <div>
+            <label for="option_1" class="block text-lg font-medium text-gray-700">OPTION 1</label>
+            <input type="text" class="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                   id="option_1" name="option_1" #option_1="ngModel" [(ngModel)]="model.option_1" placeholder="Enter option 1">
+          </div>
+  
+          <div>
+            <label for="option_2" class="block text-lg font-medium text-gray-700">OPTION 2</label>
+            <input type="text" class="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                   id="option_2" name="option_2" #option_2="ngModel" [(ngModel)]="model.option_2" placeholder="Enter option 2">
+          </div>
+  
+          <div>
+            <label for="option_3" class="block text-lg font-medium text-gray-700">OPTION 3</label>
+            <input type="text" class="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                   id="option_3" name="option_3" #option_3="ngModel" [(ngModel)]="model.option_3" placeholder="Enter option 3">
+          </div>
+
+  
+          <div>
+            <label for="option_4" class="block text-lg font-medium text-gray-700">OPTION 4</label>
+            <input type="text" class="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                   id="option_4" name="option_4" #option_4="ngModel" [(ngModel)]="model.option_4" placeholder="Enter option 4">
+          </div>
+
+
+          <div>
+            <label for="option_3" class="block text-lg font-medium text-gray-700">ANSWER</label>
+            <input type="text" class="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                   id="Answer" name="Answer" #Answer="ngModel" [(ngModel)]="model.Answer" placeholder="Enter correct Answer..">
+          </div>
+  
+          <div class="flex justify-between items-center mt-6">
+            <button type="submit" class="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+              Submit
+            </button>
+  
+            <button type="button" class="px-6 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+                    (click)="Navigate()">
+              Go Back
+            </button>
+          </div>
+        </form>
+        <div class="mt-10">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">Student List</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full border-collapse border border-gray-300 shadow-lg rounded-lg">
+                <thead class="bg-blue-600 text-white">
+                  <tr>
+                    <th class="px-4 py-2">ID</th>
+                    <th class="px-4 py-2">QUESTIONS</th>
+                    <th class="px-4 py-2">OPTION 1</th>
+                    <th class="px-4 py-2">OPTION 2</th>
+                    <th class="px-4 py-2">OPTION 3</th>
+                    <th class="px-4 py-2">OPTION 4</th>
+                    <th class="px-4 py-2">ANSWER</th>
+                    <th class="px-4 py-2">ACTION</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let question of Questions " class="odd:bg-gray-100 even:bg-white">
+                    
+                    <td class="border px-4 py-2">{{ question.Id }}</td>
+                    <td class="border px-4 py-2">{{ question.Question }}</td>
+                    <td class="border px-4 py-2">{{ question.option_1 }}</td>
+                    <td class="border px-4 py-2">{{ question.option_2 }}</td>
+                    <td class="border px-4 py-2">{{ question.option_3 }}</td>
+                    <td class="border px-4 py-2">{{ question.option_4 }}</td>
+                    <td class="border px-4 py-2">{{ question.Answer }}</td>
+                    <td class="border px-4 py-2 text-center">
+                      <button class="px-3 py-1 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none"
+                              (click)="deletequestion(question.Id)">
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+    </div>
+  </div>
+   -->
+
+
+
+<!-- <div class="flex items-center justify-center min-h-screen bg-gray-100 mt-5 "> -->
+<div class="flex items-center justify-center  bg-gray-100 mt-5 ">
+  <div class="w-full max-w-4xl bg-white shadow-xl rounded-2xl p-8 mt-10">
+    <div class="text-center mb-6">
+      <h2 class="text-3xl font-bold text-gray-800">CREATE QUIZ</h2>
+    </div>
+    <div class="space-y-6">
+      <form #createquiz="ngForm" (ngSubmit)="onSubmit(createquiz)" class="space-y-4">
+
+        <div>
+          <label for="quiz_Id" class="block text-lg font-medium text-gray-700">QUIZ Id : </label>
+          <input type="text"
+            class="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" id="quiz_Id"
+            name="quiz_Id" #quiz_Id="ngModel" [(ngModel)]="model.quiz_Id" placeholder="Enter quiz name ">
+        </div>
+       
+        <div>
+          <label for="quiz_name" class="block text-lg font-medium text-gray-700">QUIZ NAME : </label>
+          <input type="text"
+            class="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" id="quiz_name"
+            name="quiz_name" #quiz_name="ngModel" [(ngModel)]="model.quiz_name" placeholder="Enter quiz name ">
+        </div>
+
+        <div>
+          <label for="quiz_description" class="block text-lg font-medium text-gray-700"> DESCRIPTION : </label>
+          <input type="text"
+            class="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" id="quiz_description"
+            name="quiz_description" #quiz_description="ngModel" [(ngModel)]="model.quiz_description" placeholder="Desciption ">
+        </div>
+
+        <div class="flex justify-between items-center mt-6">
+          <button type="submit"
+            class="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            CREATE QUIZ
+          </button>
+
+          <button type="button"
+            class="px-6 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+            (click)="Navigate()">
+            Go Back
+          </button>
+        </div>
+      </form>
+
+      
+      <div class="bg-gray-900 m-10 p-8 rounded-lg shadow-lg ">
+        <div class="flex flex-col gap-6 sm:items-center">
+        <div *ngFor="let quiz of quiz" class=" w-full sm:w-1/2  bg-gradient-to-r from-purple-500 to-indigo-600 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300 w-2xl">
+          <div class="p-6 text-white">
+            <h1 class="text-2xl font-bold mb-2">QUIZ ID : {{ quiz.quiz_Id }}</h1>
+            <h2 class="text-sm">QUIZ NAME : {{ quiz.quiz_name }}</h2>
+            <p>{{quiz.quiz_description}}</p>
+            <button class="mt-4 w-full bg-white text-indigo-600 font-medium py-2 rounded-lg hover:bg-indigo-100 transition" type="submit" [routerLink]="['/teacher/quiz', quiz.quiz_Id]">Add Questions</button>
+            <button type="button"
+            class="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 mt-2"
+            (click)="deletequiz(quiz.quiz_Id )">
+            Delete quiz
+          </button>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+   
+
+    </div>
+  </div>

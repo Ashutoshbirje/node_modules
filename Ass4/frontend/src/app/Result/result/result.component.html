@@ -1,0 +1,77 @@
+<!-- 
+ *ngFor="let quiz of Questions"  
+<div class=" bg-blue-600 m-10 p-8 rounded-lg shadow-lg ">
+    <div CLASS="text-white font-bold text-xl mb-7 text-center">
+      <h1>RESULTS</h1>
+    </div>
+    <div class="flex flex-col gap-6 sm:items-center">
+    <div *ngFor="let quiz of Questions" >
+    <div  class=" w-full sm:w-1/2 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300 w-2xl">
+      <div class="p-6 text-white">
+        <h1 class="text-2xl font-bold mb-2">QUIZ NAME : quiz.quiz_name</h1>
+        <h2 class="text-sm font-bold">QUIZ ID : 1 </h2>
+        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, saepe? Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
+        </p>
+        <UL>
+            <LI>TOTAL QUESTIONS   : </LI>
+            <LI>CORRECT QUESTIONS : </LI>
+            <LI>WRONG QUESTIONS   : </LI>
+            <LI>OBTAINED MARKS    : </LI>
+        </UL>
+        <button (click)="getMarks()" class="mt-4 w-full bg-white text-indigo-600 font-medium py-2 rounded-lg hover:bg-indigo-100 transition" type="submit" >Get Result</button>
+      </div>
+    </div>
+</div>
+  </div>  -->
+
+  <!-- <div class="bg-gray-900 m-10 p-8 rounded-lg shadow-lg ">
+    <div CLASS="text-white font-bold text-xl mb-7 text-center">
+      <h1>Result</h1>
+    </div>
+    <div class="flex flex-col gap-6 sm:items-center">
+    <div *ngFor="let quiz of Questions" class=" w-full sm:w-1/2 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300 w-2xl">
+      <div class="p-6 text-white">
+        <h1 class="text-2xl font-bold mb-2">QUIZ ID : {{ quiz.quiz_Id }}</h1>
+        <h2 class="text-sm">QUIZ NAME : {{ quiz.quiz_name }}</h2>
+        <div >
+            <UL  *ngFor="let result of result " class="mt-5" >
+                <LI>TOTAL QUESTIONS   : </LI>
+                <LI>CORRECT QUESTIONS :</LI>
+                <LI>WRONG QUESTIONS   : </LI>
+                <LI>OBTAINED MARKS    : </LI>
+            </UL>
+        </div>
+        <button class="mt-4 w-full bg-white text-indigo-600 font-medium py-2 rounded-lg hover:bg-indigo-100 transition" type="submit" (click)="getMarks(quiz.quiz_Id)">Get Result</button>
+      </div>
+    </div>
+  </div>  -->
+
+  <div class="bg-gray-900 m-10 p-8 rounded-lg shadow-lg">
+    <div class="text-white font-bold text-xl mb-7 text-center">
+      <h1>Result</h1>
+    </div>
+  
+    <div class="flex flex-col gap-6 sm:items-center">
+      <div *ngFor="let quiz of Questions" class="w-full sm:w-1/2 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+        <div class="p-6 text-white">
+          <h1 class="text-2xl font-bold mb-2">QUIZ ID: {{ quiz.quiz_Id }}</h1>
+          <h2 class="text-sm">QUIZ NAME: {{ quiz.quiz_name }}</h2>
+  
+          <div *ngIf="result[quiz.quiz_Id] as result" class="mt-5 ">
+            <ul>
+              <li><strong>Total Questions:</strong> {{ result.totalQuestions }}</li>
+              <li><strong>Correct Questions:</strong> {{ result.correctAnswers }}</li>
+              <li><strong>Wrong Questions:</strong> {{ result.wrongAnswers }}</li>
+              <li><strong>Obtained Marks:</strong>  {{ result.obtainedMarks }} / {{result.totalQuestions}}</li>
+            </ul>
+          </div>
+  
+          <button class="mt-4 w-full bg-white text-indigo-600 font-medium py-2 rounded-lg hover:bg-indigo-100 transition"
+                  (click)="getMarks(quiz.quiz_Id)">
+            Get Result
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

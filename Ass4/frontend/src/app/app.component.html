@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+
+<body>
+  <div>
+    <div class="flex justify-center space-x-4 bg-black h-20 text-white ">
+      <h3>MCQ QUE - ANS SYSYTEM </h3>
+    </div>
+    <div class="container ">
+
+      <div class="left">
+        <nav class="flex justify-center space-x-4">
+          <a [routerLink]="''"
+            class="font-medium rounded-lg px-3 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+            Home
+          </a>
+          <a [routerLink]="'student'"
+            class="font-medium rounded-lg px-3 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+            Student
+          </a>
+          <a [routerLink]="'teacher'"
+            class="font-medium rounded-lg px-3 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+            Teacher
+          </a>
+          <a [routerLink]="'result'"
+            class="font-medium rounded-lg px-3 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+            Reports
+          </a>
+        </nav>
+      </div>
+    </div>
+    <div>
+
+    </div>
+  </div>
+<div>
+  <router-outlet></router-outlet>
+</div>
+</body>
+
+</html>

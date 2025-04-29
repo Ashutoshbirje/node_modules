@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html ng-app="crudApp">
+<head>
+    <title>Pokédex Manager</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;      
+            --secondary: #ffcb05;    
+            --accent: #ff5350;       
+            --dark: #1e1e1e;
+            --light: #ffffff;
+            --background: #f0f6ff;
+            --gradient-light: #e8f0fe;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: var(--background);
+            color: var(--dark);
+            min-height: 100vh;
+            position: relative;
+            background-attachment: fixed;
+        }
+
+        .header-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header-logo img {
+            height: 80px;
+            margin-bottom: 20px;
+        }
+
+        .pokeball-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            animation: float 3s ease-in-out infinite;
+            opacity: 0.9;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .pokeball-icon:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 8px 32px rgba(42, 117, 187, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: url('https://assets.pokemon.com/static2/_ui/img/chrome/container_bg.png');
+            opacity: 0.1;
+            transform: rotate(45deg);
+        }
+
+        h2 {
+            color: var(--primary);
+            text-align: center; 
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        h2::before, h2::after {
+            color: var(--secondary);
+        }
+
+        h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 10px;
+            width: fit-content;
+        }
+
+        .form-group {
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            max-width: 300px;
+            padding: 12px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input[type="text"]:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(42, 117, 187, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 8px;
+            margin-top: 20px;
+            background: transparent;
+        }
+
+        th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 15px 20px;
+            font-size: 14px;
+            letter-spacing: 1px;
+            border-radius: 8px;
+        }
+
+        td {
+            padding: 15px 20px;
+            background: white;
+            position: relative;
+        }
+
+        tr td:first-child {
+            border-radius: 12px 0 0 12px;
+        }
+
+        tr td:last-child {
+            border-radius: 0 12px 12px 0;
+        }
+
+        tbody tr {
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        tbody tr:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(42, 117, 187, 0.15);
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            margin: 0 5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        button:hover::before {
+            transform: translateX(100%);
+        }
+
+        button[type="submit"] {
+            background: linear-gradient(45deg, var(--primary), #00ff00);
+            color: white;
+            padding: 12px 30px;
+            box-shadow: 0 4px 15px rgba(42, 117, 187, 0.2);
+        }
+        
+        .data{
+            background-color: #00ff00;
+        }
+        button[type="submit"] i {
+            font-size: 14px;
+        }
+
+        button[ng-click*="edit"] {
+            background: linear-gradient(45deg, var(--secondary), #39ff7e);
+            color: var(--dark);
+            box-shadow: 0 4px 15px rgba(255, 203, 5, 0.2);
+        }
+
+        button[ng-click*="delete"] {
+            background: linear-gradient(45deg, var(--accent), #e6aa5b);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 83, 80, 0.2);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.05);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button[type="submit"]::before {
+            font-family: "Font Awesome 6 Free";
+            content: "\f067";
+            margin-right: 8px;
+        }
+
+        button[ng-click*="edit"]::before {
+            font-family: "Font Awesome 6 Free";
+            content: "\f304";
+            margin-right: 8px;
+        }
+
+        button[ng-click*="delete"]::before {
+            font-family: "Font Awesome 6 Free";
+            content: "\f2ed";
+            margin-right: 8px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            background: var(--secondary);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        td:last-child {
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .error {
+            color: white;
+            padding: 15px;
+            margin: 15px 0;
+            background: var(--accent);
+            border-radius: 12px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(255, 83, 80, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .error::before {
+            content: '⚠️';
+        }
+
+        .loading-spinner {
+            border: 3px solid rgba(42, 117, 187, 0.1);
+            border-radius: 50%;
+            border-top: 3px solid var(--primary);
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body ng-controller="MainController">
+
+    <div class="container">
+        <h2>Database Manager</h2>
+        
+        <div class="form-group">
+            <label> Select Table:</label>
+            <select ng-model="selectedTable" ng-change="getTableData()">
+                <div class="data">
+                    <option value="">-- Option --</option>
+                    <option ng-repeat="table in tables" value="{{table.Tables_in_sample}}">
+                        {{table.Tables_in_sample}}
+                    </option>
+                </div>
+            </select>
+        </div>
+
+        <div ng-if="selectedTable">
+            <h3>Record Data</h3>
+            <form ng-submit="submitForm()">
+                <div class="form-group">
+                    <label>Name:</label>
+                    <input type="text" ng-model="formData.Name" required>
+                </div>
+                <div class="form-group">
+                    <label>Type:</label>
+                    <input type="text" ng-model="formData.Type" required>
+                </div>
+                <button type="submit">{{isEditing ? 'Update' : 'Add'}} Record</button>
+                <button type="button" ng-if="isEditing" ng-click="cancelEdit()">Cancel</button>
+            </form>
+
+            <h3>Record On Sample database</h3>
+            <div ng-if="error" class="error">{{error}}</div>
+            <div ng-if="loading" class="loading-spinner"></div>
+            <table>
+                <thead>
+                    <tr>
+                        <th> Name</th>
+                        <th> Type</th>
+                        <th> Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="record in tableData">
+                        <td><span class="status-dot"></span>{{record.name}}</td>
+                        <td>{{record.type}}</td>
+                        <td>
+                            <button ng-click="editRecord(record)">
+                                Edit
+                            </button>
+                            <button ng-click="deleteRecord(record)">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        var app = angular.module('crudApp', []);
+        app.controller('MainController', function($scope, $http) {
+            $scope.tables = [];
+            $scope.tableData = [];
+            $scope.selectedTable = '';
+            $scope.formData = {};
+            $scope.isEditing = false;
+            $scope.error = '';
+            $scope.loading = false;
+
+            // Get all tables
+            $http.get('http://localhost:9563/').then(
+                function(response) {
+                    $scope.tables = response.data;
+                },
+                function(error) {
+                    $scope.error = 'Error loading tables';
+                }
+            );
+
+            // Get table data
+            $scope.getTableData = function() {
+                if (!$scope.selectedTable) return;
+                
+                $scope.loading = true;
+                $http.get('http://localhost:9563/table/' + $scope.selectedTable).then(
+                    function(response) {
+                        $scope.tableData = response.data;
+                        $scope.error = '';
+                        $scope.loading = false;
+                    },
+                    function(error) {
+                        $scope.error = 'Error loading table data';
+                        $scope.loading = false;
+                    }
+                );
+            };
+
+            // Submit form (Add/Update)
+            $scope.submitForm = function() {
+                if ($scope.isEditing) {
+                    // Update record
+                    $http.put('http://localhost:9563/table/' + $scope.selectedTable + '/' + $scope.editingId, $scope.formData).then(
+                        function(response) {
+                            $scope.getTableData();
+                            $scope.resetForm();
+                            $scope.error = '';
+                        },
+                        function(error) {
+                            $scope.error = 'Error updating record';
+                        }
+                    );
+                } else {
+                    // Add record
+                    $http.post('http://localhost:9563/table/' + $scope.selectedTable, $scope.formData).then(
+                        function(response) {
+                            $scope.getTableData();
+                            $scope.resetForm();
+                            $scope.error = '';
+                        },
+                        function(error) {
+                            $scope.error = 'Error adding record';
+                        }
+                    );
+                }
+            };
+
+            // Edit record
+            $scope.editRecord = function(record) {
+                $scope.isEditing = true;
+                $scope.editingId = record.name;
+                $scope.formData = angular.copy(record);
+            };
+
+            // Delete record
+            $scope.deleteRecord = function(record) {
+                if (confirm('Are you sure you want to delete this record?')) {
+                    $http.delete('http://localhost:9563/table/' + $scope.selectedTable + '/' + record.name).then(
+                        function(response) {
+                            $scope.getTableData();
+                            $scope.error = '';
+                        },
+                        function(error) {
+                            $scope.error = 'Error deleting record';
+                        }
+                    );
+                }
+            };
+
+            // Cancel edit
+            $scope.cancelEdit = function() {
+                $scope.resetForm();
+            };
+
+            // Reset form
+            $scope.resetForm = function() {
+                $scope.formData = {};
+                $scope.isEditing = false;
+                $scope.editingId = null;
+            };
+        });
+    </script>
+
+</body>
+</html>

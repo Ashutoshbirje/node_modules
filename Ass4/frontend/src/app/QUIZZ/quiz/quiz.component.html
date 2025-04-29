@@ -1,0 +1,101 @@
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="w-full max-w-5xl bg-white shadow-xl rounded-2xl p-8 mt-10">
+      <div class="text-center mb-6">
+        <h2 class="text-3xl font-bold text-gray-800">CREATE QUESTION</h2>
+      </div>
+      <div class="space-y-6">
+        <form #department="ngForm" (ngSubmit)="onSubmit(department)" class="space-y-4">
+
+          <div>
+            <label for="Question_No" class="block text-lg font-medium text-gray-700">QUESTION NO.</label>
+            <input type="number" class="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"  id="Question_No" name="Question_No" #Question_No="ngModel" [(ngModel)]="model.Question_No" placeholder="Enter your question">
+          </div>
+  
+          <div>
+            <label for="Question" class="block text-lg font-medium text-gray-700">QUESTION</label>
+            <input type="text" class="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"  id="Question" name="Question" #Question="ngModel" [(ngModel)]="model.Question" placeholder="Enter your question">
+          </div>
+  
+          <div>
+            <label for="option_1" class="block text-lg font-medium text-gray-700">OPTION 1</label>
+            <input type="text" class="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                   id="option_1" name="option_1" #option_1="ngModel" [(ngModel)]="model.option_1" placeholder="Enter option 1">
+          </div>
+  
+          <div>
+            <label for="option_2" class="block text-lg font-medium text-gray-700">OPTION 2</label>
+            <input type="text" class="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                   id="option_2" name="option_2" #option_2="ngModel" [(ngModel)]="model.option_2" placeholder="Enter option 2">
+          </div>
+  
+          <div>
+            <label for="option_3" class="block text-lg font-medium text-gray-700">OPTION 3</label>
+            <input type="text" class="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                   id="option_3" name="option_3" #option_3="ngModel" [(ngModel)]="model.option_3" placeholder="Enter option 3">
+          </div>
+
+  
+          <div>
+            <label for="option_4" class="block text-lg font-medium text-gray-700">OPTION 4</label>
+            <input type="text" class="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                   id="option_4" name="option_4" #option_4="ngModel" [(ngModel)]="model.option_4" placeholder="Enter option 4">
+          </div>
+
+
+          <div>
+            <label for="option_3" class="block text-lg font-medium text-gray-700">ANSWER</label>
+            <input type="text" class="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                   id="Answer" name="Answer" #Answer="ngModel" [(ngModel)]="model.Answer" placeholder="Enter correct Answer..">
+          </div>
+  
+          <div class="flex justify-between items-center mt-6">
+            <button type="submit" class="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+              Submit
+            </button>
+  
+            <button type="button" class="px-6 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+                    (click)="Navigate()">
+              Go Back
+            </button>
+          </div>
+        </form>
+        <div class="mt-10">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">Questions : </h3>
+            <div class="overflow-x-auto">
+              <table class="w-full border-collapse border border-gray-300 shadow-lg rounded-lg">
+                <thead class="bg-blue-600 text-white">
+                  <tr>
+                    <th class="px-4 py-2">ID</th>
+                    <th class="px-4 py-2">QUESTIONS</th>
+                    <th class="px-4 py-2">OPTION 1</th>
+                    <th class="px-4 py-2">OPTION 2</th>
+                    <th class="px-4 py-2">OPTION 3</th>
+                    <th class="px-4 py-2">OPTION 4</th>
+                    <th class="px-4 py-2">ANSWER</th>
+                    <th class="px-4 py-2">ACTION</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let question of Questions " class="odd:bg-gray-100 even:bg-white">
+                    
+                    <td class="border px-4 py-2">{{ question.Question_No }}</td>
+                    <td class="border px-4 py-2">{{ question.Question }}</td>
+                    <td class="border px-4 py-2">{{ question.option_1 }}</td>
+                    <td class="border px-4 py-2">{{ question.option_2 }}</td>
+                    <td class="border px-4 py-2">{{ question.option_3 }}</td>
+                    <td class="border px-4 py-2">{{ question.option_4 }}</td>
+                    <td class="border px-4 py-2">{{ question.Answer }}</td>
+                    <td class="border px-4 py-2 text-center">
+                      <button class="px-3 py-1 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none"
+                              (click)="deletequestion(question.Question_No , question.quiz_id)">
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+    </div>
+  </div>
+  

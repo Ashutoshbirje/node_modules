@@ -1,3 +1,6 @@
+# Refferance Link
+> https://extendit.us/steps-configure-multiple-nodes-cassandra-single-windows-machine
+
 # Prerequisites
 > Docker Desktop installed on Windows
 > Git Bash or WSL terminal (for running shell scripts on Windows)
