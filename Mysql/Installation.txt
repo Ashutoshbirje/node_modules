@@ -14,3 +14,83 @@ CREATE TABLE erp_entries (
   name VARCHAR(255) NOT NULL,
   prn CHAR(10) NOT NULL
 );
+
+# SQL
+
+-- Create a database
+CREATE DATABASE CollegeDB;
+
+-- Use database 
+USE CollegeDB
+
+-- Create a table
+CREATE TABLE Students (
+    ID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Age INT,
+    Email VARCHAR(100)
+);
+
+-- Create a related table with FOREIGN KEY
+CREATE TABLE Enrollments (
+    EnrollmentID INT PRIMARY KEY,
+    StudentID INT,
+    CourseName VARCHAR(100),
+    FOREIGN KEY (StudentID) REFERENCES Students(ID)
+);
+
+-- Modify a table: add a column
+ALTER TABLE Students ADD Address VARCHAR(255);
+
+-- Modify a table: drop a column
+ALTER TABLE Students DROP COLUMN Address;
+
+-- Add a FOREIGN KEY after table creation
+ALTER TABLE Enrollments 
+ADD CONSTRAINT fk_student 
+FOREIGN KEY (StudentID) REFERENCES Students(ID);
+
+-- Rename a table
+ALTER TABLE Students RENAME TO Learners;
+
+-- Delete a table
+DROP TABLE Enrollments;
+
+-- Remove all rows from a table (without deleting table)
+TRUNCATE TABLE Students;
+
+-- Insert a new row
+INSERT INTO Students (ID, Name, Age, Email) 
+VALUES (1, 'John Doe', 20, 'john@example.com');
+
+-- Insert into related table (must match foreign key)
+INSERT INTO Enrollments (EnrollmentID, StudentID, CourseName)
+VALUES (101, 1, 'Mathematics');
+
+-- Update a record
+UPDATE Students 
+SET Age = 21 
+WHERE ID = 1;
+
+-- Delete a record
+DELETE FROM Enrollments WHERE EnrollmentID = 101;
+DELETE FROM Students WHERE ID = 1;  -- Only works if no related Enrollments
+
+-- Select all columns
+SELECT * FROM Students;
+
+-- Select specific columns
+SELECT Name, Age FROM Students;
+
+-- Filter with WHERE clause
+SELECT * FROM Students WHERE Age > 18;
+
+-- Use DISTINCT to remove duplicates
+SELECT DISTINCT Age FROM Students;
+
+-- Use IN and BETWEEN
+SELECT * FROM Students WHERE Age IN (18, 21);
+SELECT * FROM Students WHERE Age BETWEEN 18 AND 25;
+
+-- Use LIKE for pattern matching
+SELECT * FROM Students WHERE Name LIKE 'J%';

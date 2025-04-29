@@ -1,0 +1,33 @@
+1) Angular Installation
+
+npm install -g @angular/cli       # Install Angular CLI globally
+ng v                              # Check Angular version
+ng new <app-name>                 # Create new Angular project
+cd <app-name>                     # Navigate to project folder
+ng serve                          # Start development server
+ng serve --open                   # Start and open in default browser
+
+ng g c <component-name>           # Generate component
+ng g c <path/component-name>      # Generate component in folder
+
+ng g s <service-name>             # Generate service
+ng g m <module-name>              # Generate module
+ng g d <directive-name>           # Generate directive
+ng g p <pipe-name>                # Generate pipe
+ng g i <interface-name>           # Generate interface
+ng g e <enum-name>                # Generate enum
+ng g class <class-name>           # Generate class
+
+ng build                          # Build the project
+ng build --prod                   # Build for production (minified, optimized)
+ng build --configuration=production
+
+npm install <package-name>        # Install a new package
+npm uninstall <package-name>      # Remove a package
+rm -rf node_modules               # Delete all modules
+npm cache clean --force           # Clear npm cache
+
+npm install                       # Reinstall dependencies
+ng add angular-cli-ghpages        # Install deployment plugin
+ng build --prod --base-href "https://<user>.github.io/<repo>/"
+npx angular-cli-ghpages --dir=dist/<project-name>

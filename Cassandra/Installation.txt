@@ -2,6 +2,7 @@
 https://astra.datastax.com/org/273f08ef-144f-4c54-adbd-937497fd25a1
 
 # COMMAND 
+
 > USE "keyspace_name";
 > DESCRIBE KEYSPACES;
 > CREATE KEYSPACE "keyspace_name" 
@@ -12,6 +13,90 @@ https://astra.datastax.com/org/273f08ef-144f-4c54-adbd-937497fd25a1
   ...
   );
 > SELECT * FROM "keyspace_name".table_name;
+
+# CQL
+
+-- Create a keyspace
+CREATE KEYSPACE mykeyspace
+WITH replication = {
+  'class': 'SimpleStrategy',
+  'replication_factor': 3
+};
+
+-- Create with NetworkTopologyStrategy (for multi-DC)
+CREATE KEYSPACE mykeyspace
+WITH replication = {
+  'class': 'NetworkTopologyStrategy',
+  'dc1': 3,
+  'dc2': 2
+};
+
+-- Use a keyspace
+USE mykeyspace;
+
+-- Drop a keyspace
+DROP KEYSPACE mykeyspace;
+
+-- Create a table
+CREATE TABLE students (
+  id UUID PRIMARY KEY,
+  name TEXT,
+  age INT,
+  email TEXT
+);
+
+-- Add a new column
+ALTER TABLE students ADD address TEXT;
+
+-- Rename a column
+ALTER TABLE students RENAME email TO contact_email;
+
+-- Drop a column
+ALTER TABLE students DROP address;
+
+-- Drop a table
+DROP TABLE students;
+
+-- Insert one row
+INSERT INTO students (id, name, age, email)
+VALUES (uuid(), 'John Doe', 21, 'john@example.com');
+
+-- Select all rows
+SELECT * FROM students;
+
+-- Select specific columns
+SELECT name, age FROM students;
+
+-- Filter with WHERE (only on primary key columns)
+SELECT * FROM students WHERE id = <UUID>;
+
+-- LIMIT results
+SELECT * FROM students LIMIT 5;
+
+-- ORDER BY (only on clustering columns)
+SELECT * FROM students WHERE id = <UUID> ORDER BY age DESC;
+
+-- Update values
+UPDATE students
+SET age = 22
+WHERE id = <UUID>;
+
+-- Delete specific column
+DELETE email FROM students WHERE id = <UUID>;
+
+-- Delete entire row
+DELETE FROM students WHERE id = <UUID>;
+
+BEGIN BATCH
+  INSERT INTO students (id, name, age, email) VALUES (uuid(), 'Alice', 20, 'alice@example.com');
+  UPDATE students SET age = 21 WHERE id = <UUID>;
+APPLY BATCH;
+
+DESCRIBE keyspaces;         -- List keyspaces
+DESCRIBE tables;            -- List tables in current keyspace
+DESCRIBE table students;    -- Show schema of a table
+
+TRUNCATE students;          -- Remove all data from table
 
 
 

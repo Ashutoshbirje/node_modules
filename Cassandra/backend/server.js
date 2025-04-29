@@ -25,7 +25,7 @@ const client = new cassandra.Client({
 
 // Connect to Astra DB
 client.connect()
-  .then(() => console.log("✅ Connected to Astra DB (Cassandra)"))
+  .then(() => console.log("✅ Connected to Cassandra"))
   .catch((err) => console.error("❌ Connection error:", err));
 
 // ---------------- ERP Form Submission ----------------
@@ -50,7 +50,6 @@ app.post("/api/erp/create", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
 
 // Start server
 app.listen(port, () => {

@@ -1,7 +1,0 @@
-1) Angular Installation
-> npm install -g @angular/cli
-> ng v
-> ng new <name_of_folder>
-> cd <name_of_folder>
-> ng serve 
-> ng serve --open

@@ -1,0 +1,51 @@
+
+# COMMAND 
+
+mongosh                         // Start MongoDB shell
+show dbs                        // List all databases
+use myDatabase                  // Switch to or create a database
+db                              // Show current database
+db.dropDatabase()               // Drop the current database
+show collections                // List all collections in current DB
+db.createCollection("students") // Create a new collection
+db.students.drop()              // Drop a collection
+
+// Insert one document
+db.students.insertOne({
+  name: "Alice",
+  age: 21,
+  course: "CS"
+})
+
+// Insert multiple documents
+db.students.insertMany([
+  { name: "Bob", age: 22 },
+  { name: "Charlie", age: 23 }
+])
+
+db.students.find()                            // Find all documents
+db.students.find().pretty()                   // Format output
+db.students.find({ age: { $gt: 21 } })        // Conditional find
+db.students.find({ name: "Alice" })           // Exact match
+db.students.find({}, { name: 1, _id: 0 })     // Projection (include/exclude fields)
+
+// Update one document
+db.students.updateOne(
+  { name: "Alice" },
+  { $set: { age: 22 } }
+)
+
+// Update multiple documents
+db.students.updateMany(
+  { age: { $lt: 23 } },
+  { $set: { status: "minor" } }
+)
+
+db.students.deleteOne({ name: "Alice" })        // Delete one document
+db.students.deleteMany({ status: "minor" })     // Delete multiple documents
+db.students.countDocuments()                    // Count all documents
+db.students.find().sort({ age: 1 })             // Sort by age (1 = asc, -1 = desc)
+db.students.find().limit(3)                     // Limit number of results
+db.students.find().skip(2)                      // Skip first 2 documents
+db.students.createIndex({ name: 1 })            // Create index on "name"
+db.students.getIndexes()                        // List indexes
