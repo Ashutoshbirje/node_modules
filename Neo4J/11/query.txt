@@ -1,0 +1,27 @@
+LOAD CSV WITH HEADERS FROM 'file:///papers.csv' AS row
+MERGE (p:Paper {id: row.paper_id})
+SET p.url = row.url,
+    p.title = row.title,
+    p.year = toInteger(row.year)
+
+
+LOAD CSV WITH HEADERS FROM 'file:///citations.csv' AS row
+MATCH (a:Paper {id: row.referring_id}), (b:Paper {id: row.cited_id})
+MERGE (a)-[:CITES]->(b)
+
+
+
+LOAD CSV WITH HEADERS FROM 'file:///authors.csv' AS row
+WITH row WHERE row.author IS NOT NULL AND row.paper_id IS NOT NULL
+MERGE (a:Author {name: row.author})
+WITH a, row
+MATCH (p:Paper {id: row.paper_id})
+MERGE (a)-[:WROTE]->(p)
+
+
+LOAD CSV WITH HEADERS FROM 'file:///classifications.csv' AS row
+WITH row WHERE row.classification IS NOT NULL AND row.filename IS NOT NULL
+MERGE (c:Classification {name: row.classification})
+WITH c, row
+MATCH (p:Paper {url: row.filename})
+MERGE (p)-[:HAS_CLASSIFICATION]->(c)
