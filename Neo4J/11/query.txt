@@ -5,6 +5,8 @@ SET p.url = row.url,
     p.year = toInteger(row.year)
 
 
+
+
 LOAD CSV WITH HEADERS FROM 'file:///citations.csv' AS row
 MATCH (a:Paper {id: row.referring_id}), (b:Paper {id: row.cited_id})
 MERGE (a)-[:CITES]->(b)
