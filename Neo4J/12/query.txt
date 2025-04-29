@@ -1,0 +1,42 @@
+// Create nodes
+CREATE (:TrainStation { city: 'Copenhagen', lat: 55.672874, lon: 12.56459 });
+
+CREATE (:Office { city: 'Malmo', lat: 55.611784, lon: 12.994341 });
+
+UNWIND range(1, 10000) AS id
+CREATE (:Location {
+    name: 'Location_' + id,
+    lat: 55.5 + rand() * 0.5,
+    lon: 12.5 + rand() * 0.5
+});
+
+// Create relationships from TrainStation to nearby Locations
+MATCH (t:TrainStation), (l:Location)
+WHERE point.distance(
+    point({latitude: t.lat, longitude: t.lon}),
+    point({latitude: l.lat, longitude: l.lon})
+) < 10000
+MERGE (t)-[:TRAVEL_ROUTE]->(l);
+
+// Create relationships from Office to nearby Locations
+MATCH (o:Office), (l:Location)
+WHERE point.distance(
+    point({latitude: o.lat, longitude: o.lon}),
+    point({latitude: l.lat, longitude: l.lon})
+) < 10000
+MERGE (o)-[:TRAVEL_ROUTE]->(l);
+
+// Query closest 5 Locations to TrainStation
+MATCH (t:TrainStation), (l:Location)
+RETURN l.name, 
+    round(point.distance(
+        point({latitude: t.lat, longitude: t.lon}), 
+        point({latitude: l.lat, longitude: l.lon})
+    )) AS distance_meters
+ORDER BY distance_meters ASC
+LIMIT 5;
+
+// Query 100 travel routes
+MATCH (a)-[r:TRAVEL_ROUTE]->(b)
+RETURN a, r, b
+LIMIT 100;
